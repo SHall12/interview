@@ -54,8 +54,8 @@ return the user's routes for only the services listed.
 ## Building/Running
 
 To run tests: 
-`go test ./...`
+`go test -v ./...`
 
 To build:
-In /interview/cmd/interview, run `go install`
-In /go/bin run `./interview`
+`go build .`
+`./interview`

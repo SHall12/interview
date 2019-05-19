@@ -2,15 +2,19 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
-
+      - image: circleci/golang:1.12
+    working_directory: /go/src/interview/
+    environment:
+      TEST_RESULTS: /tmp/test-results
     steps:
       - checkout
-
-      - run:
-          name: Build
-          command: cat sampleoutput.txt
-
+      - run: mkdir -p $TEST_RESULTS
       - run:
           name: Test
-          command: echo "Not implemented" && exit 1
+          command: trap "go test -v ./..." EXIT
+      - run:
+          name: Build
+          command: go build .
+      - run:
+          name: Run
+          command: ./interview
