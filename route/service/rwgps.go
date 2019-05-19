@@ -12,8 +12,8 @@ func NewRwgps() *rwgps {
 	}
 }
 
-func (s *rwgps) getRoutesByUser(user string) ([]string, error) {
-	routes := s.routes
+func (svc *rwgps) GetRoutesByUser(user string) ([]string, error) {
+	routes := svc.routes
 	userRoutes := make([]string, len(routes))
 	for index, val := range routes {
 		userRoutes[index] = val + user

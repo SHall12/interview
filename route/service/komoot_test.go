@@ -5,10 +5,10 @@ import (
 	"testing"
 )
 
-func TestNewStrava(t *testing.T) {
-	var defaultRoutes = []string{"SRT", "CVT", "Perkiomen"}
+func TestNewKomoot(t *testing.T) {
+	var defaultRoutes = []string{"SRT", "Welsh Mountain", "Oaks to Philly"}
 
-	svc := NewStrava()
+	svc := NewKomoot()
 	routes, _ := svc.GetRoutes()
 
 	if !reflect.DeepEqual(defaultRoutes, routes) {
@@ -16,10 +16,10 @@ func TestNewStrava(t *testing.T) {
 	}
 }
 
-func TestStravaGetRoutesByUser(t *testing.T) {
+func TestKomootGetRoutesByUser(t *testing.T) {
 	var testRoutes = []string{"SRT", "CVT", "Perkiomen"}
 	var userName = "dude"
-	var namedRoutes = []string{"dudeSRT", "dudeCVT", "dudePerkiomen"}
+	var namedRoutes = []string{"dudeSRTdude", "dudeCVTdude", "dudePerkiomendude"}
 	tt := []struct {
 		name     string
 		routes   []string
@@ -41,11 +41,17 @@ func TestStravaGetRoutesByUser(t *testing.T) {
 		{
 			name:     "Single route",
 			user:     userName,
-			routes:   testRoutes[0:0],
-			expected: namedRoutes[0:0],
+			routes:   testRoutes[:1],
+			expected: namedRoutes[:1],
 		},
 		{
 			name:     "Multiple routes",
+			user:     userName,
+			routes:   testRoutes,
+			expected: namedRoutes,
+		},
+		{
+			name:     "Multiple routesAgain",
 			user:     userName,
 			routes:   testRoutes,
 			expected: namedRoutes,
@@ -60,7 +66,7 @@ func TestStravaGetRoutesByUser(t *testing.T) {
 
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
-			svc := strava{&DefaultService{routes: tc.routes}}
+			svc := komoot{&DefaultService{routes: tc.routes}}
 			routes, _ := svc.GetRoutesByUser(tc.user)
 
 			if !reflect.DeepEqual(tc.expected, routes) {

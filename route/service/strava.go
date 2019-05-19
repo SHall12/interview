@@ -1,8 +1,5 @@
 package service
 
-// TODO: Make other services
-// TODO: make tests
-
 const StravaName string = "Strava"
 
 type strava struct {
@@ -15,8 +12,8 @@ func NewStrava() *strava {
 	}
 }
 
-func (s *strava) getRoutesByUser(user string) ([]string, error) {
-	routes := s.routes
+func (svc *strava) GetRoutesByUser(user string) ([]string, error) {
+	routes := svc.routes
 	userRoutes := make([]string, len(routes))
 	for index, val := range routes {
 		userRoutes[index] = user + val

@@ -36,7 +36,7 @@ func TestGetRoutes(t *testing.T) {
 
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
-			routes, _ := tc.service.getRoutes()
+			routes, _ := tc.service.GetRoutes()
 
 			if !reflect.DeepEqual(tc.expected, routes) {
 				t.Errorf("Routes do not match. Expected: %v, Returned: %v", tc.expected, routes)

@@ -9,7 +9,7 @@ func TestNewRwgps(t *testing.T) {
 	var defaultRoutes = []string{"CVT", "Perkiomen", "Welsh Mountain"}
 
 	svc := NewRwgps()
-	routes, _ := svc.getRoutes()
+	routes, _ := svc.GetRoutes()
 
 	if !reflect.DeepEqual(defaultRoutes, routes) {
 		t.Fatalf("Routes do not match. Expected: %v, Returned: %v", defaultRoutes, routes)
@@ -67,7 +67,7 @@ func TestRwgpsGetRoutesByUser(t *testing.T) {
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
 			svc := rwgps{&DefaultService{routes: tc.routes}}
-			routes, _ := svc.getRoutesByUser(tc.user)
+			routes, _ := svc.GetRoutesByUser(tc.user)
 
 			if !reflect.DeepEqual(tc.expected, routes) {
 				t.Errorf("Routes do not match. Expected: %v, Returned: %v", tc.expected, routes)
