@@ -53,4 +53,9 @@ return the user's routes for only the services listed.
 
 ## Building/Running
 
-TODO: please provide instructions to build and run your program(s) along with any require tools an dependencies.
+To run tests: 
+`go test ./...`
+
+To build:
+In /interview/cmd/interview, run `go install`
+In /go/bin run `./interview`
